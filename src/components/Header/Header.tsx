@@ -1,12 +1,19 @@
-import React from 'react';
-import Cart from '../Cart/Cart';
+import React, { Fragment } from 'react';
+import HeaderCart from './HeaderCart';
 import './Header.scss';
+import foods from '../../assets/meals.jpg';
+
 const Header = (props: any) => {
   return (
-    <div className='header'>
-      <div className='header__title'>Food Order</div>
-      <Cart clasName='header__card' />
-    </div>
+    <Fragment>
+      <header className='header'>
+        <h1>Food Order</h1>
+        <HeaderCart clasName='header__card' />
+      </header>
+      <div className='header__main-image'>
+        <img src={foods} alt='tasty foods' />
+      </div>
+    </Fragment>
   );
 };
 

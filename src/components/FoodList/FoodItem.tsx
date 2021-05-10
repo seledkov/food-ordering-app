@@ -9,6 +9,14 @@ const FoodItem = (props: any) => {
     decription: props.decription,
     price: props.price,
   };
+  const keyHandler = (e: any) => {
+    // e.preventDefault();
+    if (e.key == 'ArrowLeft') {
+      console.log('key press  <--');
+    } else {
+      console.log('other key...');
+    }
+  };
   const ctx = useContext(AuthContext);
   const addFoodHandler = () => {
     console.log('add food');
@@ -27,7 +35,7 @@ const FoodItem = (props: any) => {
 
       <div>
         <label htmlFor='amount'>Amount</label>
-        <input type='number' id='amount' />
+        <input type='text' id='amount' onKeyDown={(e) => keyHandler(e)} />
         <button type='button' placeholder='1' onClick={addFoodHandler}>
           add
         </button>

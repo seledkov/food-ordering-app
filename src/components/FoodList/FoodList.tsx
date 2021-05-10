@@ -1,6 +1,7 @@
 import React from 'react';
-import './FoodList.css';
+import './FoodList.scss';
 import FoodItem from './FoodItem';
+import Card from '../UI/Card';
 
 export type FoodItem = {
   name: string;
@@ -9,20 +10,22 @@ export type FoodItem = {
 };
 const FoodList = (props: any) => {
   return (
-    <div className='food-list'>
-      <ul>
-        {props.foodList.map((item: FoodItem, index: number) => {
-          return (
-            <FoodItem
-              key={index}
-              name={item.name}
-              decription={item.decription}
-              price={item.price}
-            />
-          );
-        })}
-      </ul>
-    </div>
+    <section className='food-list'>
+      <Card>
+        <ul>
+          {props.foodList.map((item: FoodItem, index: number) => {
+            return (
+              <FoodItem
+                key={index}
+                name={item.name}
+                decription={item.decription}
+                price={item.price}
+              />
+            );
+          })}
+        </ul>
+      </Card>
+    </section>
   );
 };
 export default FoodList;
