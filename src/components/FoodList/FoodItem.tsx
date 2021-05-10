@@ -1,44 +1,32 @@
 import React, { useContext } from 'react';
 import AuthContext from '../store/auth-context';
 import Button from '../UI/Button';
-import './FoodItem.css';
+import './FoodItem.scss';
+import FoodItemForm from './FoodItemForm';
 
 const FoodItem = (props: any) => {
-  const item: {} = {
-    name: props.name,
-    decription: props.decription,
-    price: props.price,
-  };
-  const keyHandler = (e: any) => {
-    // e.preventDefault();
-    if (e.key == 'ArrowLeft') {
-      console.log('key press  <--');
-    } else {
-      console.log('other key...');
-    }
-  };
   const ctx = useContext(AuthContext);
-  const addFoodHandler = () => {
+  const addFoodHandler = (id: number | string) => {
     console.log('add food');
 
-    ctx.onAddCartList(item);
+    ctx.onAddCartList({
+      id: props.id,
+      name: props.name,
+      decription: props.decription,
+      price: props.price,
+    });
 
     console.log(ctx.cartList);
   };
   return (
     <li className='food-item'>
       <div>
-        <h2>{props.name}</h2>
-        <p> decription:{props.decription} </p>
-        <p> price:{props.price}</p>
+        <h3>{props.name}</h3>
+        <div className='food-item__description'>{props.decription} </div>
+        <div className='food-item__price'>${props.price.toFixed(2)}</div>
       </div>
-
       <div>
-        <label htmlFor='amount'>Amount</label>
-        <input type='text' id='amount' onKeyDown={(e) => keyHandler(e)} />
-        <button type='button' placeholder='1' onClick={addFoodHandler}>
-          add
-        </button>
+        <FoodItemForm onClick={addFoodHandler} />
       </div>
     </li>
   );

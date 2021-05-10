@@ -4,6 +4,7 @@ import { isTemplateExpression } from 'typescript';
 
 type ICardList = FoodItem[];
 type FoodItem = {
+  id: string;
   name: string;
   description?: string;
   price: number;
@@ -22,10 +23,10 @@ const AuthContext = React.createContext({
   totalPrice: 0,
 });
 const startOrderList = [
-  { name: 'sushi', decription: 'asian food', price: 22, amount: 1 },
-  { name: 'meat', decription: 'euro food', price: 15, amount: 1 },
-  { name: 'pasta', decription: 'italian food', price: 10, amount: 1 },
-  { name: 'coffee', decription: 'euro drink', price: 4, amount: 1 },
+  { id: 'm1', name: 'sushi', decription: 'asian food', price: 22, amount: 1 },
+  { id: 'm2', name: 'meat', decription: 'euro food', price: 15, amount: 1 },
+  { id: 'm3', name: 'pasta', decription: 'italian food', price: 10, amount: 1 },
+  { id: 'm4', name: 'coffee', decription: 'euro drink', price: 4, amount: 1 },
 ];
 export const AuthContextProvider = (props: any) => {
   const [orderList, setOrderList] = useState(startOrderList);
