@@ -26,7 +26,7 @@ const FoodItem = (props: any) => {
         <div className='food-item__price'>${props.price.toFixed(2)}</div>
       </div>
       <div>
-        <FoodItemForm onClick={addFoodHandler} />
+        <FoodItemForm id={props.id} onClick={addFoodHandler} />
       </div>
     </li>
   );

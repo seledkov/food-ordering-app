@@ -1,32 +1,46 @@
-.modal-cart {
-  margin: 100px auto 0px;
-  background: white;
-  position: fixed;
-  left: 25%;
-  width: 50%;
-  z-index: 100;
-  overflow: hidden;
-  padding: 20px;
-  &__item {
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 2px solid gray;
-    padding: 20px;
-    margin: 10px;
-  }
-  &__background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.75);
-  }
-  &__total {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-  }
+.modal-cart__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 20rem;
+  overflow: auto;
+}
+
+.modal-cart__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+
+.modal-cart__actions {
+  text-align: right;
+}
+
+.modal-cart__actions button {
+  font: inherit;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #8a2b06;
+  padding: 0.5rem 2rem;
+  border-radius: 25px;
+  margin-left: 1rem;
+}
+
+.modal-cart__actions button:hover,
+.modal-cart__actions button:active {
+  background-color: #5a1a01;
+  border-color: #5a1a01;
+  color: white;
+}
+
+.modal-cart__actions .modal-cart__button--alt {
+  color: #8a2b06;
+}
+
+.modal-cart__actions .modal-cart__button {
+  background-color: #8a2b06;
+  color: white;
 }

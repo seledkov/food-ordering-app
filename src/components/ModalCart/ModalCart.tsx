@@ -1,49 +1,40 @@
 import React, { useContext } from 'react';
-import ReactDOM from 'react-dom';
 import AuthContext from '../store/auth-context';
 import './ModalCart.scss';
-import Card from '../UI/Card';
 const ModalCart = (props: any) => {
   const ctx = useContext(AuthContext);
-  // const clicked = (index: any) => {
-  //   ctx.onDeleteCartItem(index);
-  // };
+
   return (
     <React.Fragment>
-      {ctx.isCartModal &&
-        ReactDOM.createPortal(
-          <div className='modal-cart__background'>modal background</div>,
-          document.getElementById('modal__bcg')!,
-        )}
-
-      {ctx.isCartModal &&
-        ReactDOM.createPortal(
-          <Card>
-            <div className='modal-cart'>
-              {ctx.cartList.map((item: any, index: number) => {
-                return (
-                  <div className='modal-cart__item' key={index}>
-                    <div>
-                      <p>{item.name}</p>
-                      <p>${item.price}</p>
-                    </div>
-                    <div>
-                      <button> - </button> <button> + </button>
-                    </div>
-                  </div>
-                );
-              })}
-              <div className='modal-cart__total'>
-                <div>total amount: {ctx.totalPrice}</div>
+      <div className='modal-cart'>
+        <ul className='modal-cart__items'>
+          {ctx.cartList.map((item: any, index: number) => {
+            return (
+              <li className='modal-cart__item' key={item.id}>
                 <div>
-                  <button onClick={ctx.closeModalCart}>close</button>
-                  <button>order</button>
+                  <p>{item.name}</p>
+                  <p>${item.price}</p>
                 </div>
-              </div>
-            </div>
-          </Card>,
-          document.getElementById('modal__cart')!,
-        )}
+                <div>
+                  <button> - </button> <button> + </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        <div className='modal-cart__total'>
+          <span>total amount: </span>
+          <span>{ctx.totalPrice} </span>
+        </div>
+        <div className='modal-cart__actions'>
+          <button
+            className='modal-cart__button--alt'
+            onClick={ctx.closeModalCart}>
+            close
+          </button>
+          <button className='modal-cart__button'>order</button>
+        </div>
+      </div>
     </React.Fragment>
   );
 };
