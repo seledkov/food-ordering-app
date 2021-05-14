@@ -1,6 +1,11 @@
 import { Fragment } from 'react';
 import './Input.scss';
-const Input = (props: any) => {
+type IInputProps = {
+  label: string;
+  id: any;
+  input: {};
+};
+const Input = (props: IInputProps) => {
   return (
     <div className='input'>
       <label htmlFor={props.id}>{props.label}</label>

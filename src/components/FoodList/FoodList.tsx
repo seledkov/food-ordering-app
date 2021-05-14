@@ -3,24 +3,28 @@ import './FoodList.scss';
 import FoodItem from './FoodItem';
 import Card from '../UI/Card';
 
-export type FoodItem = {
+export type IFoodItem = {
   id: string | number;
   name: string;
   decription: string;
   price: number;
+  amount: number;
 };
 const FoodList = (props: any) => {
-  const renderFoodList = props.foodList.map((item: FoodItem, index: number) => {
-    return (
-      <FoodItem
-        key={item.id}
-        id={item.id}
-        name={item.name}
-        decription={item.decription}
-        price={item.price}
-      />
-    );
-  });
+  const renderFoodList = props.foodList.map(
+    (item: IFoodItem, index: number) => {
+      return (
+        <FoodItem
+          key={index}
+          id={item.id}
+          name={item.name}
+          decription={item.decription}
+          price={item.price}
+          amount={item.amount}
+        />
+      );
+    },
+  );
 
   return (
     <section className='food-list'>

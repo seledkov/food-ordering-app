@@ -33,43 +33,45 @@ export const AuthContextProvider = (props: any) => {
   const [cartList, setCartList] = useState<ICardList>([]);
   const [isCartModal, setIsCartModal] = useState<boolean>(false);
   const [totalPrice, setTotalPrice] = useState(0);
-  const addCartList = (item: any) => {
+  const addCartList = (item: FoodItem) => {
     setCartList((prevState) => {
       return [...prevState, item];
     });
   };
-  const deleteCartItem = (itemID: any) => {
+  const deleteCartItem = (itemID: number) => {
     const newCartList = [...cartList];
     newCartList.slice(itemID, 1);
     setCartList(newCartList);
   };
   const openModalCartHandler = () => {
     setIsCartModal(true);
-    sumCartItem();
+    sumCartItems();
   };
   const closeModalCartHandler = () => {
     setIsCartModal(false);
   };
 
-  const sumCartItem = () => {
+  const sumCartItems = () => {
+    // todo use reduce?
     let count = 0;
     cartList.forEach((item) => {
       count += item.price;
     });
     setTotalPrice(count);
   };
+
+  const CartContext = {
+    orderList: orderList,
+    cartList: cartList,
+    onAddCartList: addCartList,
+    onDeleteCartItem: deleteCartItem,
+    isCartModal: isCartModal,
+    openModalCart: openModalCartHandler,
+    closeModalCart: closeModalCartHandler,
+    totalPrice: totalPrice,
+  };
   return (
-    <AuthContext.Provider
-      value={{
-        orderList: orderList,
-        cartList: cartList,
-        onAddCartList: addCartList,
-        onDeleteCartItem: deleteCartItem,
-        isCartModal: isCartModal,
-        openModalCart: openModalCartHandler,
-        closeModalCart: closeModalCartHandler,
-        totalPrice: totalPrice,
-      }}>
+    <AuthContext.Provider value={CartContext}>
       {props.children}
     </AuthContext.Provider>
   );

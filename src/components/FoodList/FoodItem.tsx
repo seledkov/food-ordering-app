@@ -14,6 +14,7 @@ const FoodItem = (props: any) => {
       name: props.name,
       decription: props.decription,
       price: props.price,
+      amount: props.amount,
     });
 
     console.log(ctx.cartList);
