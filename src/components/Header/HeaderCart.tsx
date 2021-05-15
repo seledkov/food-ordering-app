@@ -5,12 +5,13 @@ import CartIcon from './CartIcon';
 
 const HeaderCart = (props: any) => {
   const ctx = useContext(AuthContext);
-  const numberOfCartItems = ctx.cartList.reduce(
-    (currentAmount: any, item: any) => {
+  const numberOfCartItems = ctx.cartListState.reduce(
+    (currentAmount: number, item: any) => {
       return currentAmount + item.amount;
     },
     0,
   );
+
   return (
     <button className='cart-button' onClick={ctx.openModalCart}>
       <span className='cart-button__icon'>

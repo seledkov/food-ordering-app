@@ -5,20 +5,6 @@ import './FoodItem.scss';
 import FoodItemForm from './FoodItemForm';
 
 const FoodItem = (props: any) => {
-  const ctx = useContext(AuthContext);
-  const addFoodHandler = (id: number | string) => {
-    console.log('add food');
-
-    ctx.onAddCartList({
-      id: props.id,
-      name: props.name,
-      decription: props.decription,
-      price: props.price,
-      amount: props.amount,
-    });
-
-    console.log(ctx.cartList);
-  };
   return (
     <li className='food-item'>
       <div>
@@ -27,7 +13,7 @@ const FoodItem = (props: any) => {
         <div className='food-item__price'>${props.price.toFixed(2)}</div>
       </div>
       <div>
-        <FoodItemForm id={props.id} onClick={addFoodHandler} />
+        <FoodItemForm {...props} />
       </div>
     </li>
   );

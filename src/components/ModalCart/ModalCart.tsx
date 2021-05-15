@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useReducer } from 'react';
 import AuthContext from '../store/auth-context';
 import './ModalCart.scss';
 const ModalCart = (props: any) => {
@@ -8,12 +8,13 @@ const ModalCart = (props: any) => {
     <React.Fragment>
       <div className='modal-cart'>
         <ul className='modal-cart__items'>
-          {ctx.cartList.map((item: any, index: number) => {
+          {ctx.cartListState.map((item: any, index: number) => {
             return (
-              <li className='modal-cart__item' key={item.id}>
+              <li className='modal-cart__item' key={index}>
                 <div>
                   <p>{item.name}</p>
                   <p>${item.price}</p>
+                  <p> amount: {item.amount}</p>
                 </div>
                 <div>
                   <button> - </button> <button> + </button>
@@ -24,7 +25,7 @@ const ModalCart = (props: any) => {
         </ul>
         <div className='modal-cart__total'>
           <span>total amount: </span>
-          <span>{ctx.totalPrice} </span>
+          <span>{ctx.totalAmount} </span>
         </div>
         <div className='modal-cart__actions'>
           <button
