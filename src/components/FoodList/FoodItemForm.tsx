@@ -14,7 +14,6 @@ const FoodItemForm = (props: any) => {
     const currentItem = {
       id: props.id,
       name: props.name,
-      decription: props.decription,
       price: props.price,
       amount: enteredAmount,
     };

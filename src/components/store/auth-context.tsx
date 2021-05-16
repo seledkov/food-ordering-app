@@ -1,12 +1,11 @@
 import React, { useState, useReducer } from 'react';
 
-type ICardList = FoodItem[];
 type FoodItem = {
   id: string;
   name: string;
   description?: string;
   price: number;
-  amount?: number;
+  amount: number;
   // [idx]?: string;
 };
 
@@ -28,18 +27,43 @@ const AuthContext = React.createContext({
   openModalCart: () => {},
   closeModalCart: () => {},
 });
-const startOrderList = [
-  { id: 'm1', name: 'sushi', decription: 'asian food', price: 22, amount: 1 },
-  { id: 'm2', name: 'meat', decription: 'euro food', price: 15, amount: 1 },
-  { id: 'm3', name: 'pasta', decription: 'italian food', price: 10, amount: 1 },
-  { id: 'm4', name: 'coffee', decription: 'euro drink', price: 4, amount: 1 },
+const startOrderList: FoodItem[] = [
+  {
+    id: 'm1',
+    name: 'Rolls',
+    description: 'asian food',
+    price: 12.49,
+    amount: 1,
+  },
+  {
+    id: 'm2',
+    name: 'Steak',
+    description: 'euro food',
+    price: 15.99,
+    amount: 1,
+  },
+  {
+    id: 'm3',
+    name: 'Pasta',
+    description: 'italian food',
+    price: 10.99,
+    amount: 1,
+  },
+  {
+    id: 'm4',
+    name: 'Green Salad',
+    description: 'euro food',
+    price: 4.6,
+    amount: 1,
+  },
 ];
 
 const cardReducer = (state: any, action: any) => {
   if (action.type === 'ADD_ITEM') {
-    const updateState = state.items.concat(action.item);
+    // todo-add modalcart logic
     const updateTotalAmount =
       state.totalAmount + action.item.price * action.item.amount;
+    const updateState = state.items.concat(action.item);
     return {
       items: updateState,
       totalAmount: updateTotalAmount,
@@ -49,13 +73,10 @@ const cardReducer = (state: any, action: any) => {
 };
 export const AuthContextProvider = (props: any) => {
   const [orderList, setOrderList] = useState(startOrderList);
-  const [cartList, setCartList] = useState<ICardList>([]);
   const [isCartModal, setIsCartModal] = useState<boolean>(false);
-  const [totalPrice, setTotalPrice] = useState(0);
 
   // === cartReducer
   const defaultCartState = { items: [], totalAmount: 0 };
-
   const [cartListState, dispatchCartListAction] = useReducer(
     cardReducer,
     defaultCartState,
@@ -72,32 +93,9 @@ export const AuthContextProvider = (props: any) => {
   // === modal status
   const openModalCartHandler = () => {
     setIsCartModal(true);
-    sumCartItems();
   };
   const closeModalCartHandler = () => {
     setIsCartModal(false);
-  };
-
-  //=== state cart handler
-
-  const addCartList = (item: FoodItem) => {
-    setCartList((prevState) => {
-      return [...prevState, item];
-    });
-  };
-  const deleteCartItem = (itemID: number) => {
-    const newCartList = [...cartList];
-    newCartList.slice(itemID, 1);
-    setCartList(newCartList);
-  };
-
-  const sumCartItems = () => {
-    // todo use reduce?
-    let count = 0;
-    cartList.forEach((item) => {
-      count += item.price;
-    });
-    setTotalPrice(count);
   };
 
   const CartContext = {
