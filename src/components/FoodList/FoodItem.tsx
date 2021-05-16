@@ -9,7 +9,7 @@ const FoodItem = (props: any) => {
     <li className='food-item'>
       <div>
         <h3>{props.name}</h3>
-        <div className='food-item__description'>{props.decription} </div>
+        <div className='food-item__description'>{props.description} </div>
         <div className='food-item__price'>${props.price.toFixed(2)}</div>
       </div>
       <div>

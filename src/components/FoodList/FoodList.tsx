@@ -6,7 +6,7 @@ import Card from '../UI/Card';
 export type IFoodItem = {
   id: string | number;
   name: string;
-  decription: string;
+  description: string;
   price: number;
   amount: number;
 };
@@ -18,7 +18,7 @@ const FoodList = (props: any) => {
           key={index}
           id={item.id}
           name={item.name}
-          decription={item.decription}
+          description={item.description}
           price={item.price}
           amount={item.amount}
         />
