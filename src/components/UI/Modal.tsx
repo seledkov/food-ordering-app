@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
-import { createTextChangeRange, textSpanContainsPosition } from 'typescript';
 import AuthContext from '../store/auth-context';
 import './Modal.scss';
 

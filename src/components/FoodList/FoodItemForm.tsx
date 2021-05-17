@@ -35,7 +35,6 @@ const FoodItemForm = (props: any) => {
           step: '1',
           defaultValue: '1',
         }}
-        // ref={currentFoodItems}
       />
       <button type='submit'>+ Add</button>
     </form>

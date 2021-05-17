@@ -57,15 +57,33 @@ const startOrderList: FoodItem[] = [
     amount: 1,
   },
 ];
-
+const defaultCartState = { items: [], totalAmount: 0 };
 const cardReducer = (state: any, action: any) => {
   if (action.type === 'ADD_ITEM') {
     // todo-add modalcart logic
-    const updateTotalAmount =
+    console.log(action);
+    const updateTotalAmount: number =
       state.totalAmount + action.item.price * action.item.amount;
-    const updateState = state.items.concat(action.item);
+    //find item
+    const existingCartItemIndex: number = state.items.findIndex(
+      (item: any) => item.id === action.item.id,
+    );
+    // let item todo study reducer v146
+    let updatedItems;
+    const existingCartItem = state.items[existingCartItemIndex];
+    if (existingCartItem) {
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount + action.item.amount,
+      };
+      updatedItems = [...state.items];
+      updatedItems[existingCartItemIndex] = updatedItem;
+    } else {
+      updatedItems = state.items.concat(action.item);
+    }
+
     return {
-      items: updateState,
+      items: updatedItems,
       totalAmount: updateTotalAmount,
     };
   }
@@ -76,7 +94,7 @@ export const AuthContextProvider = (props: any) => {
   const [isCartModal, setIsCartModal] = useState<boolean>(false);
 
   // === cartReducer
-  const defaultCartState = { items: [], totalAmount: 0 };
+
   const [cartListState, dispatchCartListAction] = useReducer(
     cardReducer,
     defaultCartState,
