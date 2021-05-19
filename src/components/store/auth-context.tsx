@@ -87,6 +87,30 @@ const cardReducer = (state: any, action: any) => {
       totalAmount: updateTotalAmount,
     };
   }
+  if (action.type === 'REMOVE_ITEM') {
+    const existingCartItemIndex = state.items.findIndex(
+      (item: any) => item.id === action.id,
+    );
+    const existingCartItem = state.items[existingCartItemIndex];
+    const updateTotalAmount: number =
+      state.totalAmount - +existingCartItem.price;
+    let updatedItems;
+    if (existingCartItem.amount === 1) {
+      updatedItems = state.items.filter((item: any) => item.id !== action.id);
+    }
+    if (existingCartItem.amount > 1) {
+      const updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount - 1,
+      };
+      updatedItems = [...state.items];
+      updatedItems[existingCartItemIndex] = updatedItem;
+    }
+    return {
+      items: updatedItems,
+      totalAmount: updateTotalAmount,
+    };
+  }
   throw 'error add type';
 };
 export const AuthContextProvider = (props: any) => {
@@ -106,7 +130,12 @@ export const AuthContextProvider = (props: any) => {
       item: item,
     });
   };
-  const removeItemFromCartHandler = (id: number) => {};
+  const removeItemFromCartHandler = (id: number) => {
+    dispatchCartListAction({
+      type: 'REMOVE_ITEM',
+      id: id,
+    });
+  };
 
   // === modal status
   const openModalCartHandler = () => {

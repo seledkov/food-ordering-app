@@ -6,8 +6,12 @@ const ModalCart = (props: any) => {
   const ctx = useContext(AuthContext);
   const hasItems: boolean = ctx.cartListState.length > 0;
 
-  const cartItemAddHandler = (item: any) => {};
-  const cartItemRemoveHandler = (id: any) => {};
+  const cartItemAddHandler = (item: any) => {
+    ctx.onAddCartList({ ...item, amount: 1 });
+  };
+  const cartItemRemoveHandler = (id: any) => {
+    ctx.onDeleteCartItem(id);
+  };
   return (
     <React.Fragment>
       <div className='modal-cart'>
@@ -20,14 +24,14 @@ const ModalCart = (props: any) => {
                 price={item.price}
                 amount={item.amount}
                 onRemove={cartItemRemoveHandler.bind(null, item.id)}
-                onAdd={cartItemAddHandler}
+                onAdd={cartItemAddHandler.bind(null, item)}
               />
             );
           })}
         </ul>
         <div className='modal-cart__total'>
           <span>total amount: </span>
-          <span>{ctx.totalAmount.toFixed(2)} </span>
+          <span>${ctx.totalAmount.toFixed(2)} </span>
         </div>
         <div className='modal-cart__actions'>
           <button
