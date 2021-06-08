@@ -9,6 +9,7 @@ import FoodListDescription from './components/FoodList/FoodListDescription';
 // ========== App ==============
 const App: React.FC = (props: any) => {
   const ctx = useContext(AuthContext);
+  console.log(ctx.orderList);
   return (
     <Fragment>
       <Header />

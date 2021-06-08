@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 import { IFoodItem } from '../../interface';
 
 type Reducer<S, A> = (state: S, action: A) => State;
@@ -19,36 +19,37 @@ const AuthContext = React.createContext({
   openModalCart: () => {},
   closeModalCart: () => {},
 });
-const startOrderList: IFoodItem[] = [
-  {
-    id: 1,
-    name: 'Rolls',
-    description: 'asian food',
-    price: 12.49,
-    amount: 1,
-  },
-  {
-    id: 2,
-    name: 'Steak',
-    description: 'euro food',
-    price: 15.99,
-    amount: 1,
-  },
-  {
-    id: 3,
-    name: 'Pasta',
-    description: 'italian food',
-    price: 10.99,
-    amount: 1,
-  },
-  {
-    id: 4,
-    name: 'Green Salad',
-    description: 'euro food',
-    price: 4.6,
-    amount: 1,
-  },
-];
+// const startOrderList: IFoodItem[] = [
+//   {
+//     id: 1,
+//     name: 'Rolls',
+//     description: 'finest fish and veggies',
+//     price: 22.49,
+//     amount: 1,
+//   },
+//   {
+//     id: 2,
+//     name: 'Schnitzel',
+//     description: 'a getman specialty',
+//     price: 15.99,
+//     amount: 1,
+//   },
+//   {
+//     id: 3,
+//     name: 'Pasta',
+//     description: 'italian',
+//     price: 10.99,
+//     amount: 1,
+//   },
+//   {
+//     id: 4,
+//     name: 'Barbecue Burger',
+//     description: 'American, raw, meaty',
+//     price: 12.99,
+//     amount: 1,
+//   },
+// ];
+
 const defaultCartState = { items: [], totalAmount: 0 };
 const cardReducer = (state: State, action: Action) => {
   if (action.type === 'ADD_ITEM') {
@@ -100,7 +101,6 @@ const cardReducer = (state: State, action: Action) => {
   throw 'error add type';
 };
 export const AuthContextProvider = (props: any) => {
-  const [orderList, setOrderList] = useState(startOrderList);
   const [isCartModal, setIsCartModal] = useState<boolean>(false);
 
   // === cartReducer
@@ -132,7 +132,7 @@ export const AuthContextProvider = (props: any) => {
   };
 
   const CartContext = {
-    orderList: orderList,
+    orderList: [],
 
     cartListState: cartListState.items,
     totalAmount: cartListState.totalAmount,
