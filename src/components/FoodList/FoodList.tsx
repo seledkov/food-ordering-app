@@ -7,13 +7,13 @@ import Card from '../UI/Card';
 const FoodList = (props: any) => {
   const [orderList, setOrderList] = useState<any>();
   const [error, setError] = useState(' error ');
-  const [isLoading, setIsLoading] = useState<boolean>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const json = 'https://react-http-a2f61-default-rtdb.europe-west1.firebasedatabase.app/meals.json';
 
   useEffect(() => {
     const fetchOrderList = async () => {
-      const response = await fetch(
-        'https://react-http-a2f61-default-rtdb.europe-west1.firebasedatabase.app/meals.json',
-      );
+      setIsLoading(true);
+      const response = await fetch(json);
       const responseData = await response.json();
       const loadedFoodList = [];
       for (const key in responseData) {
@@ -25,7 +25,9 @@ const FoodList = (props: any) => {
         };
         loadedFoodList.push(item);
       }
+
       setOrderList(loadedFoodList);
+      setIsLoading(false);
       console.log(loadedFoodList);
     };
     fetchOrderList();
@@ -46,6 +48,13 @@ const FoodList = (props: any) => {
       );
     });
 
+  if (isLoading) {
+    return (
+      <section className='food-list'>
+        <p> Loading... </p>
+      </section>
+    );
+  }
   return (
     <section className='food-list'>
       <Card>
