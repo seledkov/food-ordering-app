@@ -3,8 +3,12 @@
   width: 90%;
   margin: 2rem auto;
   animation: meals-appear 1s ease-out forwards;
+  &__loading {
+    color: #fff;
+    text-align: center;
+    padding-top: 1rem;
+  }
 }
-
 .food-list ul {
   list-style: none;
   margin: 0;

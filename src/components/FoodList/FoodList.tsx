@@ -8,7 +8,7 @@ const FoodList = (props: any) => {
   const [orderList, setOrderList] = useState<any>();
   const [error, setError] = useState(' error ');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const json = 'https://react-http-a2f61-default-rtdb.europe-west1.firebasedatabase.app/meals.json';
+  const json = 'https://react-http-a2f61-default-rtdb.europe-west1.firebasedatabase.app/meals';
 
   useEffect(() => {
     const fetchOrderList = async () => {
@@ -50,7 +50,7 @@ const FoodList = (props: any) => {
 
   if (isLoading) {
     return (
-      <section className='food-list'>
+      <section className='food-list__loading'>
         <p> Loading... </p>
       </section>
     );
