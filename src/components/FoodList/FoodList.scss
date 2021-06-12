@@ -8,6 +8,11 @@
     text-align: center;
     padding-top: 1rem;
   }
+  &__error {
+    color: rgb(212, 105, 4);
+    text-align: center;
+    padding-top: 1rem;
+  }
 }
 .food-list ul {
   list-style: none;

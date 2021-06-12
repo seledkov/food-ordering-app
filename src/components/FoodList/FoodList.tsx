@@ -6,14 +6,19 @@ import Card from '../UI/Card';
 
 const FoodList = (props: any) => {
   const [orderList, setOrderList] = useState<any>();
-  const [error, setError] = useState(' error ');
+  const [httpError, setHttpError] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const json = 'https://react-http-a2f61-default-rtdb.europe-west1.firebasedatabase.app/meals';
 
   useEffect(() => {
     const fetchOrderList = async () => {
       setIsLoading(true);
-      const response = await fetch(json);
+      const response = await fetch(
+        'https://react-http-a2f61-default-rtdb.europe-west1.firebasedatabase.app/meals.json',
+      );
+      console.log(response);
+      if (!response.ok) {
+        throw new Error('Sometime went wrong');
+      }
       const responseData = await response.json();
       const loadedFoodList = [];
       for (const key in responseData) {
@@ -25,12 +30,16 @@ const FoodList = (props: any) => {
         };
         loadedFoodList.push(item);
       }
-
       setOrderList(loadedFoodList);
       setIsLoading(false);
       console.log(loadedFoodList);
     };
-    fetchOrderList();
+
+    fetchOrderList().catch((error) => {
+      console.log(error);
+      setIsLoading(false);
+      setHttpError(error.message);
+    });
   }, []);
 
   const renderFoodList =
@@ -52,6 +61,13 @@ const FoodList = (props: any) => {
     return (
       <section className='food-list__loading'>
         <p> Loading... </p>
+      </section>
+    );
+  }
+  if (httpError) {
+    return (
+      <section className='food-list__error'>
+        <p>{httpError}</p>
       </section>
     );
   }
