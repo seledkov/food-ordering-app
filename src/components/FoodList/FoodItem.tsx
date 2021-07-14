@@ -10,7 +10,7 @@ const FoodItem = (props: any) => {
       <div>
         <h3>{props.name}</h3>
         <div className='food-item__description'>{props.description} </div>
-        <div className='food-item__price'>${props.price.toFixed(2)}</div>
+        <div className='food-item__price'>${props.price}</div>
       </div>
       <div>
         <FoodItemForm {...props} />

@@ -12,6 +12,7 @@ const FoodList = (props: any) => {
   useEffect(() => {
     const fetchOrderList = async () => {
       setIsLoading(true);
+      //todo - change db new private setting
       const response = await fetch(
         'https://react-http-a2f61-default-rtdb.europe-west1.firebasedatabase.app/meals.json',
       );
@@ -19,6 +20,7 @@ const FoodList = (props: any) => {
       if (!response.ok) {
         throw new Error('Sometime went wrong');
       }
+
       const responseData = await response.json();
       const loadedFoodList = [];
       for (const key in responseData) {
